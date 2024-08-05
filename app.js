@@ -63,10 +63,6 @@ const sessionOptions = {
     },
 };
 
-// app.get("/", (req,res) =>{
-//     res.send("Hi,I am root");
-// });
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -79,6 +75,10 @@ passport.use(new LocalStrategy(User.authenticate()));     // authenticate() gene
 // use static serialize and deserialize of model for passport session support
 passport.serializeUser(User.serializeUser());            // serializeUser() Generates a function that is used by Passport to serialize users into the session
 passport.deserializeUser(User.deserializeUser());       //  deserializeUser() Generates a function that is used by Passport to deserialize users into the session
+
+app.get("/", (req,res) =>{
+    res.redirect("/listings")
+});
 
 app.use( (req,res,next) =>{
     res.locals.successMsg = req.flash("success");       // now we can use this successMsg(array) with any ejs template even with boilerplate ejs template 
