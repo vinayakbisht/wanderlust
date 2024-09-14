@@ -10,7 +10,7 @@ module.exports.index = async (req,res) =>{
 };
 
 module.exports.search = async (req,res) =>{
-    let value = req.body.location;
+    let value = req.query.location;
     let allListings = await Listing.find( { $or: [ 
         {location: { $regex: value, $options: "i"}},          //$options: i makes the search case-insensitive
         {country: { $regex: value, $options: "i"}}             //$regex use to search for listings where the location field contains the value in the value variable as a substring
